@@ -1,0 +1,67 @@
+{
+  "title": "Ryver",
+  "description": "Component send message to Ryver",
+  "docsUrl": "https://github.com/elasticio/petstore-component-nodejs",
+  "credentials": {
+    "fields": {
+      "org": {
+        "label": "Organization name",
+        "required": true,
+        "viewClass": "TextFieldView",
+        "note": "Enter here your Ryver organization name."
+      },
+      "user": {
+        "label": "Username",
+        "required": true,
+        "viewClass": "TextFieldView",
+        "note": "Please enter your Ryver username."
+      },
+      "pass": {
+        "label": "Password",
+        "required": true,
+        "viewClass": "TextFieldView",
+        "note": "Please enter your Ryver password."
+      }
+    }
+  },
+  "triggers": {
+    "getListOfChats": {
+      "main": "./lib/triggers/getRyverChats.js",
+      "type": "polling",
+      "title": "Get Chats List From Ryver",
+      "fields": {
+        "chat": {
+          "label": "Chat Room",
+          "required": true,
+          "viewClass": "SelectView",
+          "model": {
+            "forums": "Open Forums",
+            "workrooms": "Private Teams"
+          },
+          "prompt": "Select Ryver Chat Room"
+        }
+      },
+      "metadata": {
+        "out": "./lib/schemas/getChatsByChatroom.out.json"
+      }
+    }
+  },
+  "actions": {
+    "messageToRyverForumChat": {
+      "main": "./lib/actions/messageToRyverForumChat.js",
+      "title": "Send message to Ryver forum chat",
+      "metadata": {
+        "in": "./lib/schemas/createMessageToRyver.in.json",
+        "out": "./lib/schemas/createMessageToRyver.out.json"
+      }
+    },
+    "messageToRyverTeamChat": {
+      "main": "./lib/actions/messageToRyverTeamChat.js",
+      "title": "Send message to Ryver team chat",
+      "metadata": {
+        "in": "./lib/schemas/createMessageToRyver.in.json",
+        "out": "./lib/schemas/createMessageToRyver.out.json"
+      }
+    }
+  }
+}

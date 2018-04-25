@@ -1,0 +1,32 @@
+{
+  "type": "object",
+  "properties":{
+    "results": {
+      "type": "array",
+      "required": true,
+      "title": "Direct Messages",
+      "properties":{
+        "id":{
+          "type": "numeric",
+          "required": true,
+          "title": "ID"
+        },
+        "username":{
+          "type": "string",
+          "required": true,
+          "title": "Username"
+        },
+        "emailAddress":{
+          "type": "string",
+          "required": true,
+          "title": "Mail"
+        },
+        "displayName":{
+          "type": "string",
+          "required": true,
+          "title": "Name"
+        }        
+      }
+    }
+  }
+}
