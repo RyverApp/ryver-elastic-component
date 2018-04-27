@@ -55,7 +55,7 @@
           "viewClass": "SelectView",
           "label": "Select chat to send message",
           "required": false,
-          "model" : "listForumsChats",
+          "model" : "listForums",
           "prompt" :"Please select a chat"
         },
         "dynamicMetadata":true
@@ -73,7 +73,7 @@
           "viewClass": "SelectView",
           "label": "Select chat to send message",
           "required": false,
-          "model" : "listTeamChats",
+          "model" : "listTeams",
           "prompt" :"Please select a chat"
         },
         "dynamicMetadata":true
@@ -91,7 +91,7 @@
           "viewClass": "SelectView",
           "label": "Select chat to send message",
           "required": false,
-          "model" : "listDirectChats",
+          "model" : "listUsers",
           "prompt" :"Please select a chat"
         },
         "dynamicMetadata":true
