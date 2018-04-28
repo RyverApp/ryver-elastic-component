@@ -47,52 +47,23 @@
     }
   },
   "actions": {
-    "messageToRyverForumChat": {
-      "main": "./lib/actions/messageToRyverForumChat.js",
-      "title": "Send message to Ryver forum chat",
+    "sendMessage": {
+      "main": "./lib/actions/sendMessage.js",
+      "title": "Send message to Ryver chat",
       "fields" : {
-        "chatId" : {
+        "type" : {
           "viewClass": "SelectView",
-          "label": "Select chat to send message",
+          "label": "Select chat type",
           "required": false,
-          "model" : "listForums",
-          "prompt" :"Please select a chat"
+          "model" : "listType",
+          "prompt" :"Please select a chat type"
         },
-        "dynamicMetadata":true
-      },
-      "metadata": {
-        "in":"./lib/schemas/messageData.in.json",
-        "out": "./lib/schemas/messageData.out.json"
-      }
-    },
-    "messageToRyverTeamChat": {
-      "main": "./lib/actions/messageToRyverTeamChat.js",
-      "title": "Send message to Ryver team chat",
-      "fields" : {
         "chatId" : {
           "viewClass": "SelectView",
-          "label": "Select chat to send message",
+          "label": "Select chat name",
           "required": false,
-          "model" : "listTeams",
-          "prompt" :"Please select a chat"
-        },
-        "dynamicMetadata":true
-      },
-      "metadata": {
-        "in":"./lib/schemas/messageData.in.json",
-        "out": "./lib/schemas/messageData.out.json"
-      }
-    },
-    "messageToRyverDirectChat": {
-      "main": "./lib/actions/messageToRyverDirectChat.js",
-      "title": "Send message to Ryver direct chat",
-      "fields" : {
-        "chatId" : {
-          "viewClass": "SelectView",
-          "label": "Select chat to send message",
-          "required": false,
-          "model" : "listUsers",
-          "prompt" :"Please select a chat"
+          "model" : "listChat",
+          "prompt" :"Please select a chat name"
         },
         "dynamicMetadata":true
       },

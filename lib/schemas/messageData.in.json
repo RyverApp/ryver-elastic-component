@@ -3,12 +3,17 @@
   "properties": {
     "title": {
       "type": "string",
-      "required": true,
-      "title": "Title"
+      "required": false,
+      "title": "From Name (optional)"
+    },
+    "avatar": {
+      "type": "string",
+      "required": false,
+      "title": "From Avatar (optional)"
     },
     "body": {
       "type": "string",
-      "required": true,
+      "required": false,
       "title": "Message Body"
     }
   }
