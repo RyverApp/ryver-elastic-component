@@ -53,6 +53,56 @@
       "fields" : {
         "type" : {
           "viewClass": "SelectView",
+          "label": "Send to forum, team or user?",
+          "required": false,
+          "model" : "listType",
+          "prompt" :"Please select an optionw"
+        },
+        "chatId" : {
+          "viewClass": "SelectView",
+          "label": "Choose location:",
+          "required": false,
+          "model" : "listChat",
+          "prompt" :"Please select a chat name"
+        },
+        "dynamicMetadata":true
+      },
+      "metadata": {
+        "in":"./lib/schemas/messageData.in.json",
+        "out": "./lib/schemas/messageData.out.json"
+      }
+    },
+    "invite": {
+      "main": "./lib/actions/sendMessage.js",
+      "title": "Invite User",
+      "fields" : {
+        "type" : {
+          "viewClass": "SelectView",
+          "label": "Select chat type",
+          "required": false,
+          "model" : "listType",
+          "prompt" :"Please select a chat type"
+        },
+        "chatId" : {
+          "viewClass": "SelectView",
+          "label": "Select chat name",
+          "required": false,
+          "model" : "listChat",
+          "prompt" :"Please select a chat name"
+        },
+        "dynamicMetadata":true
+      },
+      "metadata": {
+        "in":"./lib/schemas/messageData.in.json",
+        "out": "./lib/schemas/messageData.out.json"
+      }
+    },
+    "post": {
+      "main": "./lib/actions/sendMessage.js",
+      "title": "Make a Post",
+      "fields" : {
+        "type" : {
+          "viewClass": "SelectView",
           "label": "Select chat type",
           "required": false,
           "model" : "listType",
