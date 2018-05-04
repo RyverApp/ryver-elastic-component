@@ -56,14 +56,14 @@
           "label": "Send to forum, team or user?",
           "required": false,
           "model" : "listType",
-          "prompt" :"Please select an optionw"
+          "prompt" :"Please select an option"
         },
         "chatId" : {
           "viewClass": "SelectView",
           "label": "Choose location:",
           "required": false,
           "model" : "listChat",
-          "prompt" :"Please select a chat name"
+          "prompt" :"Please select a location"
         },
         "dynamicMetadata":true
       },
@@ -72,54 +72,61 @@
         "out": "./lib/schemas/messageData.out.json"
       }
     },
-    "invite": {
-      "main": "./lib/actions/sendMessage.js",
-      "title": "Invite User",
+    "createTopic": {
+      "main": "./lib/actions/postTopic.js",
+      "title": "Create Topic",
       "fields" : {
         "type" : {
           "viewClass": "SelectView",
-          "label": "Select chat type",
+          "label": "Send to forum, team or user?",
           "required": false,
-          "model" : "listType",
-          "prompt" :"Please select a chat type"
+          "model" : "postList",
+          "prompt" :"Please select an option"
         },
         "chatId" : {
           "viewClass": "SelectView",
-          "label": "Select chat name",
+          "label": "Choose location:",
           "required": false,
           "model" : "listChat",
-          "prompt" :"Please select a chat name"
+          "prompt" :"Please select a location"
         },
         "dynamicMetadata":true
       },
       "metadata": {
-        "in":"./lib/schemas/messageData.in.json",
-        "out": "./lib/schemas/messageData.out.json"
+        "in":"./lib/schemas/topicData.in.json",
+        "out": "./lib/schemas/topicData.out.json"
       }
     },
-    "post": {
-      "main": "./lib/actions/sendMessage.js",
-      "title": "Make a Post",
+    "createTask": {
+      "main": "./lib/actions/createTask.js",
+      "title": "Create Task",
       "fields" : {
         "type" : {
           "viewClass": "SelectView",
-          "label": "Select chat type",
+          "label": "Send to forum, team or user?",
           "required": false,
-          "model" : "listType",
-          "prompt" :"Please select a chat type"
+          "model" : "postList",
+          "prompt" :"Please select an option"
         },
         "chatId" : {
           "viewClass": "SelectView",
-          "label": "Select chat name",
+          "label": "Choose location:",
           "required": false,
           "model" : "listChat",
-          "prompt" :"Please select a chat name"
+          "prompt" :"Please select a location"
+        },
+        "cat" : {
+          "viewClass": "SelectView",
+          "label": "Select category",
+          "required": false,
+          "model" : "listCategory",
+          "prompt" :"Please select a category"
         },
         "dynamicMetadata":true
       },
       "metadata": {
-        "in":"./lib/schemas/messageData.in.json",
-        "out": "./lib/schemas/messageData.out.json"
+        "in":"./lib/schemas/taskData.in.json",
+        "out": "./lib/schemas/taskData.out.json"
       }
     }
   }
