@@ -1,0 +1,42 @@
+{
+  "type": "object",
+  "properties": {
+    "history": {
+      "type": "array",
+      "required": true,
+      "title": "Chat",
+      "properties": {
+        "id": {
+          "type": "numeric",
+          "required": true,
+          "title": "ID"
+        },
+        "date": {
+          "type": "string",
+          "required": true,
+          "title": "Date"
+        },
+        "from": {
+          "type": "string",
+          "required": true,
+          "title": "From"
+        },
+        "to": {
+          "type": "string",
+          "required": true,
+          "title": "To"
+        },
+        "body": {
+          "type": "string",
+          "required": true,
+          "title": "Body"
+        },
+        "type": {
+          "type": "string",
+          "required": true,
+          "title": "Type"
+        }
+      }
+    }
+  }
+}

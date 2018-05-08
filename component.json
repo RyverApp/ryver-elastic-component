@@ -1,6 +1,6 @@
 {
   "title": "Ryver",
-  "description": "Component send message to Ryver",
+  "description": "Component to create Ryver tasks",
   "docsUrl": "https://github.com/elasticio/petstore-component-nodejs",
   "credentials": {
     "fields": {
@@ -43,6 +43,31 @@
       },
       "metadata": {
         "out": "./lib/schemas/getChatsByChatroom.out.json"
+      }
+    },
+    "listChatHistoryTrig": {
+      "main": "./lib/actions/listChatHistory.js",
+      "type": "polling",
+      "title": "Get chat history",
+      "fields" : {
+        "type" : {
+          "viewClass": "SelectView",
+          "label": "List from forum or team?",
+          "required": false,
+          "model" : "postList",
+          "prompt" :"Please select an option"
+        },
+        "chatId" : {
+          "viewClass": "SelectView",
+          "label": "Choose location:",
+          "required": false,
+          "model" : "listChat",
+          "prompt" :"Please select a location"
+        },
+        "dynamicMetadata":true
+      },
+      "metadata": {
+        "out": "./lib/schemas/listChatHistory.out.json"
       }
     }
   },
@@ -103,7 +128,7 @@
       "fields" : {
         "type" : {
           "viewClass": "SelectView",
-          "label": "Send to forum, team or user?",
+          "label": "Send to forum or team?",
           "required": false,
           "model" : "postList",
           "prompt" :"Please select an option"
@@ -127,6 +152,125 @@
       "metadata": {
         "in":"./lib/schemas/taskData.in.json",
         "out": "./lib/schemas/taskData.out.json"
+      }
+    },
+    "listTopic": {
+      "main": "./lib/actions/getTopicList.js",
+      "title": "List topics",
+      "fields" : {
+        "type" : {
+          "viewClass": "SelectView",
+          "label": "List from forum or team?",
+          "required": false,
+          "model" : "postList",
+          "prompt" :"Please select an option"
+        },
+        "chatId" : {
+          "viewClass": "SelectView",
+          "label": "Choose location:",
+          "required": false,
+          "model" : "listChat",
+          "prompt" :"Please select a location"
+        },
+        "dynamicMetadata":true
+      }
+    },
+    "listTopicMessage": {
+      "main": "./lib/actions/getMessagesTopicList.js",
+      "title": "List messages from topics",
+      "fields" : {
+        "type" : {
+          "viewClass": "SelectView",
+          "label": "Send to forum or team?",
+          "required": false,
+          "model" : "postList",
+          "prompt" :"Please select an option"
+        },
+        "chatId" : {
+          "viewClass": "SelectView",
+          "label": "Choose location:",
+          "required": false,
+          "model" : "listChat",
+          "prompt" :"Please select a location"
+        },
+        "topic" : {
+          "viewClass": "SelectView",
+          "label": "Select category",
+          "required": false,
+          "model" : "listTopics",
+          "prompt" :"Please select a category"
+        },
+        "dynamicMetadata":true
+      }
+    },
+    "listCategoryTasks": {
+      "main": "./lib/actions/listTaskCategory.js",
+      "title": "List tasks from category",
+      "fields" : {
+        "type" : {
+          "viewClass": "SelectView",
+          "label": "List from forum or team?",
+          "required": false,
+          "model" : "postList",
+          "prompt" :"Please select an option"
+        },
+        "chatId" : {
+          "viewClass": "SelectView",
+          "label": "Choose location:",
+          "required": false,
+          "model" : "listChat",
+          "prompt" :"Please select a location"
+        },
+        "cat" : {
+          "viewClass": "SelectView",
+          "label": "Select category",
+          "required": false,
+          "model" : "listCategory",
+          "prompt" :"Please select a category"
+        },
+        "dynamicMetadata":true
+      }
+    },
+    "listMembersRoles": {
+      "main": "./lib/actions/listMembersRoles.js",
+      "title": "List members and roles",
+      "fields" : {
+        "type" : {
+          "viewClass": "SelectView",
+          "label": "List from forum or team?",
+          "required": false,
+          "model" : "postList",
+          "prompt" :"Please select an option"
+        },
+        "chatId" : {
+          "viewClass": "SelectView",
+          "label": "Choose location:",
+          "required": false,
+          "model" : "listChat",
+          "prompt" :"Please select a location"
+        },
+        "dynamicMetadata":true
+      }
+    },
+    "listChatHistory": {
+      "main": "./lib/actions/listChatHistory.js",
+      "title": "Get chat history",
+      "fields" : {
+        "type" : {
+          "viewClass": "SelectView",
+          "label": "List from forum or team?",
+          "required": false,
+          "model" : "listType",
+          "prompt" :"Please select an option"
+        },
+        "chatId" : {
+          "viewClass": "SelectView",
+          "label": "Choose location:",
+          "required": false,
+          "model" : "listChat",
+          "prompt" :"Please select a location"
+        },
+        "dynamicMetadata":true
       }
     }
   }
