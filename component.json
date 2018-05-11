@@ -103,7 +103,7 @@
       "fields" : {
         "type" : {
           "viewClass": "SelectView",
-          "label": "Send to forum, team or user?",
+          "label": "Send to forum or team?",
           "required": false,
           "model" : "postList",
           "prompt" :"Please select an option"
@@ -147,8 +147,16 @@
           "model" : "listCategory",
           "prompt" :"Please select a category"
         },
+        "assign" : {
+          "viewClass": "SelectView",
+          "label": "Assign to user (optional)",
+          "required": false,
+          "model" : "listUsers",
+          "prompt" :"Please select an option"
+        },
         "dynamicMetadata":true
       },
+
       "metadata": {
         "in":"./lib/schemas/taskData.in.json",
         "out": "./lib/schemas/taskData.out.json"
@@ -258,7 +266,7 @@
       "fields" : {
         "type" : {
           "viewClass": "SelectView",
-          "label": "List from forum or team?",
+          "label": "List from forum, team or user?",
           "required": false,
           "model" : "listType",
           "prompt" :"Please select an option"

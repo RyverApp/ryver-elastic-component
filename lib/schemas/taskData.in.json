@@ -1,6 +1,11 @@
 {
   "type": "object",
   "properties": {
+    "idAssign": {
+      "type": "string",
+      "required": false,
+      "title": "User ID for assign (Optional)"
+    },
     "subject": {
       "type": "string",
       "required": false,
