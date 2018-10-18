@@ -13,7 +13,7 @@
     },
     "body": {
       "type": "string",
-      "required": false,
+      "required": true,
       "title": "Message Body"
     }
   }

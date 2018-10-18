@@ -3,12 +3,12 @@
   "properties": {
     "subject": {
       "type": "string",
-      "required": false,
+      "required": true,
       "title": "Topic title"
     },
     "body": {
       "type": "string",
-      "required": false,
+      "required": true,
       "title": "Topic description"
     }
   }

@@ -19,7 +19,7 @@
       "pass": {
         "label": "Password",
         "required": true,
-        "viewClass": "TextFieldView",
+        "viewClass": "PasswordFieldView",
         "note": "Please enter your Ryver password."
       }
     }
@@ -79,14 +79,14 @@
         "type" : {
           "viewClass": "SelectView",
           "label": "Send to forum, team or user?",
-          "required": false,
+          "required": true,
           "model" : "listType",
           "prompt" :"Please select an option"
         },
         "chatId" : {
           "viewClass": "SelectView",
           "label": "Choose location:",
-          "required": false,
+          "required": true,
           "model" : "listChat",
           "prompt" :"Please select a location"
         },
@@ -104,14 +104,14 @@
         "type" : {
           "viewClass": "SelectView",
           "label": "Send to forum or team?",
-          "required": false,
+          "required": true,
           "model" : "postList",
           "prompt" :"Please select an option"
         },
         "chatId" : {
           "viewClass": "SelectView",
           "label": "Choose location:",
-          "required": false,
+          "required": true,
           "model" : "listChat",
           "prompt" :"Please select a location"
         },
@@ -129,14 +129,14 @@
         "type" : {
           "viewClass": "SelectView",
           "label": "Send to forum or team?",
-          "required": false,
+          "required": true,
           "model" : "postList",
           "prompt" :"Please select an option"
         },
         "chatId" : {
           "viewClass": "SelectView",
           "label": "Choose location:",
-          "required": false,
+          "required": true,
           "model" : "listChat",
           "prompt" :"Please select a location"
         },
@@ -154,6 +154,10 @@
           "model" : "listUsers",
           "prompt" :"Please select an option"
         },
+        "completed": {
+          "label": "Mark task as complete",
+          "viewClass": "CheckBoxView"
+       },
         "dynamicMetadata":true
       },
 

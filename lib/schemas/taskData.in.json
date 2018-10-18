@@ -1,6 +1,16 @@
 {
   "type": "object",
   "properties": {
+    "tags": {
+      "type": "string",
+      "required": false,
+      "title": "Tags(Optional)"
+    },
+    "checkList": {
+      "type": "string",
+      "required": false,
+      "title": "Checklist (Optional)"
+    },
     "idAssign": {
       "type": "string",
       "required": false,
@@ -8,12 +18,12 @@
     },
     "subject": {
       "type": "string",
-      "required": false,
+      "required": true,
       "title": "Task subject"
     },
     "body": {
       "type": "string",
-      "required": false,
+      "required": true,
       "title": "Task description"
     }
   }
