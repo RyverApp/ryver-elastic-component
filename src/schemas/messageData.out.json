@@ -1,0 +1,20 @@
+{
+    "type": "object",
+    "properties": {
+        "title": {
+            "type": "string",
+            "required": true,
+            "title": "Title"
+        },
+        "body": {
+            "type": "string",
+            "required": true,
+            "title": "Message Body"
+        },
+        "messageId": {
+            "type": "string",
+            "required": true,
+            "title": "Message ID"
+        }
+    }
+}

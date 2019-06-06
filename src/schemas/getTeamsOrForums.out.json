@@ -1,0 +1,22 @@
+{
+    "type": "object",
+    "properties": {
+        "results": {
+            "type":"array",
+            "required": true,
+            "title": "Teams or Forums",
+            "properties": {
+                "id": {
+                    "type": "numeric",
+                    "required": true,
+                    "title": "ID"
+                },
+                "name": {
+                    "type": "string",
+                    "required": true,
+                    "title": "Name"
+                }
+            }
+        }
+    }
+}

@@ -1,54 +1,48 @@
 "use strict";
 const btoa = require('btoa');
-const request = require('request');
-const debug = require('debug')('verifyCredentials')
+const axios = require('axios');
+const debug = require('debug')('verifyCredentials');
 
 module.exports = function verifyCredentials(credentials, cb) {
-
     var org = credentials.org;
     var user = credentials.user;
     var pass = credentials.pass;
-    var b64 = btoa(`${user}:${pass}`);
-    var auth = `Basic ${b64}`;
-    var uri = `https://${org}.ryver.com/api/1/odata.svc/User.GetCurrent()`;
+    var token = credentials.token;
+    var auth;
 
-    if (!user) {
-        throw new Error('Username is missing');
-    }
     if (!org) {
         throw new Error('Organization name is missing');
     }
-    if (!pass) {
-        throw new Error('Password is missing');
+
+    if (!token && (!user || !pass)) {
+        throw new Error('Integration token or username and password missing');
     }
 
-    var requestData = {
-        url: uri,
+    if (token) {
+        auth = `Bearer ${token}`;
+    } else {
+        var b64 = btoa(`${user}:${pass}`);
+        auth = `Basic ${b64}`;
+    }
+
+    var config = {
         headers: {
-            'content-type' : 'application/json',
-            'accept': 'application/json',
-            'authorization': auth
+            'Content-Type' : 'application/json',
+            'Accept': 'application/json',
+            'Authorization': auth
+        },
+        validateStatus: function (status) {
+            return status === 200;
         }
     };
 
-
-    request.get(requestData, checkResponse);
-
-    function checkResponse(err, response, body) {
-      if(err){
-        return cb(err);
-      }
-      debug('Ryver response was: %s %j', response.statusCode, body);
-      if(response.statusCode == 401){
-        return cb(null, {verified: false});
-      }
-      if (response.statusCode === 403) {
-          return cb(null, {verified: false, details: NOT_ENABLED_ERROR});
-      }
-      if (response.statusCode !== 200) {
-          return cb(new Error('Ryver respond with ' + response.statusCode));
-      }
-      return cb(null, {verified: true});
-
-    }
+    axios.get(`https://${org}.ryver.com/api/1/odata.svc/User.GetCurrent()`, config)
+        .then(res => {
+                debug('Ryver response was: %s %j', res.status, res.data);
+                return cb(null, { verified: true });
+            })
+        .catch(err => {
+            debug('Ryver response was: %s %j', err.response && err.response.status, err.response && err.response.data);
+            return cb(null, { verified: false });
+        });
 }
