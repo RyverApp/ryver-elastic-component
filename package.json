@@ -6,8 +6,8 @@
         "test": "exit 0",
         "red-marker": "tsc --noEmit --watch --pretty",
         "build": "yarn move-schemas && tsc",
-        "move-schemas": "cp -R src/schemas lib/",
-        "clean": "rimraf lib/",
+        "move-schemas": "cp -R src/schemas lib/schemas",
+        "clean": "rimraf lib/*",
         "prebuild": "yarn clean"
     },
     "repository": {
@@ -28,7 +28,6 @@
     },
     "devDependencies": {
         "@types/btoa": "^1.2.3",
-        "@types/co": "^4.6.1",
         "@types/node": "11.13.7",
         "rimraf": "2.6.3",
         "typescript": "3.4.5"

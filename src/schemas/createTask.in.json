@@ -1,0 +1,30 @@
+{
+    "type": "object",
+    "properties": {
+        "tags": {
+            "type": "string",
+            "required": false,
+            "title": "Tags (Optional)"
+        },
+        "checklist": {
+            "type": "string",
+            "required": false,
+            "title": "Checklist (Optional)"
+        },
+        "assignees": {
+            "type": "string",
+            "required": false,
+            "title": "Assignee User IDs (Optional)"
+        },
+        "subject": {
+            "type": "string",
+            "required": true,
+            "title": "Task subject"
+        },
+        "body": {
+            "type": "string",
+            "required": true,
+            "title": "Task description"
+        }
+    }
+}

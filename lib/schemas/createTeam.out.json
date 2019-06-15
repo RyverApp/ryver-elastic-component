@@ -1,0 +1,25 @@
+{
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "number",
+            "required": false,
+            "title": "Team ID"
+        },
+        "name": {
+            "type": "string",
+            "required": false,
+            "title": "Team Name"
+        },
+        "nickname": {
+            "type": "string",
+            "required": false,
+            "title": "Team Nickname"
+        },
+        "description": {
+            "type": "string",
+            "required": false,
+            "title": "Team Description"
+        }
+    }
+}

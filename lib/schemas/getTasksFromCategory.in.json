@@ -1,0 +1,10 @@
+{
+    "type": "object",
+    "properties": {
+        "categoryId": {
+            "type": "number",
+            "required": false,
+            "title": "Task Category ID"
+        }
+    }
+}

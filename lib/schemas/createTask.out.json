@@ -1,15 +1,20 @@
 {
     "type": "object",
     "properties": {
+        "id": {
+            "type": "number",
+            "required": true,
+            "title": "Task ID"
+        },
         "subject": {
             "type": "string",
             "required": false,
-            "title": "Topic title"
+            "title": "Task subject"
         },
         "body": {
             "type": "string",
             "required": false,
-            "title": "Topic description"
+            "title": "Task description"
         }
     }
 }

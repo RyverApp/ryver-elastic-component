@@ -1,0 +1,32 @@
+{
+    "type": "object",
+    "properties": {
+        "results": {
+            "type":"array",
+            "required": true,
+            "title": "Topics",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "required": true,
+                    "title": "ID"
+                },
+                "subject": {
+                    "type": "string",
+                    "required": false,
+                    "title": "Subject"
+                },
+                "body": {
+                    "type": "string",
+                    "required": false,
+                    "title": "Body"
+                },
+                "comments": {
+                    "type": "number",
+                    "required": false,
+                    "title": "Comments Count"
+                }
+            }
+        }
+    }
+}

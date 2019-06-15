@@ -1,5 +1,5 @@
 import { SimpleRyverAPIRequest } from '../api';
-import { getTeamOrForumModel, getEntityModel, createAuth, getType } from '../common';
+import { getTeamOrForumModel, getEntityModel, getTopicModel, createAuth } from '../common';
 var messages = require('elasticio-node').messages;
 
 exports.getTeamOrForumModel = getTeamOrForumModel;
@@ -9,12 +9,17 @@ exports.process = processAction;
 
 export function processAction(msg, cfg) {
     const org = cfg.org;
-    const b64 = btoa(`${cfg.user}:${cfg.pass}`);
-    const auth = `Basic ${b64}`;
+    const message = msg.body;
+    const topicId = message.topicId || cfg.topic;
 
+    if (!topicId) {
+        throw new Error('Topic is required');
+    }
+
+    const auth = createAuth(cfg);
     console.log(`Fetching topic comments...`);
     return new SimpleRyverAPIRequest(org, auth)
-        .get(`postComments`, { '$format': 'json', '$filter': `post/id eq ${cfg.topic}` })
+        .get(`postComments`, { '$format': 'json', '$filter': `post/id eq ${topicId}` })
         .then(res => {
             const comments = res.map(comment => ({
                 id: comment.id,
@@ -23,21 +28,6 @@ export function processAction(msg, cfg) {
                 userCreatorId: comment.createUser.id
             }));
             return messages.newMessageWithBody({ comments });
-        });
-}
-
-export function getTopicModel(cfg, cb) {
-    const org = cfg.org;
-    const auth = createAuth(cfg);
-    const resource = getType(cfg.type);
-
-    new SimpleRyverAPIRequest(org, auth)
-        .get(`${resource}(${cfg.entityId})/Post.Stream(archived=false)`, { '$format': 'json' })
-        .then(res => {
-            const byId = res.reduce((byId, topic) => (
-                byId[topic.id] = topic.subject,
-                byId
-            ), {});
-            cb(null, byId);
-        });
+        })
+        .catch(err => { throw err; });
 }

@@ -1,5 +1,5 @@
 import { SimpleRyverAPIRequest } from '../api';
-import { getTeamOrForumModel, getEntityModel, createAuth, getType } from '../common';
+import { getTeamOrForumModel, getEntityModel, createAuth, getResource } from '../common';
 const messages = require('elasticio-node').messages;
 
 exports.getTeamOrForumModel = getTeamOrForumModel;
@@ -8,8 +8,19 @@ exports.process = processAction;
 
 export function processAction(msg, cfg) {
     const org = cfg.org;
+    const message = msg.body;
+    const entityId = message.entityId || cfg.entityId;
+
+    if (!cfg.type) {
+        throw new Error('Type is required');
+    }
+
+    if (!entityId) {
+        throw new Error('Location is required');
+    }
+
     const auth = createAuth(cfg);
-    const resource = getType(cfg.type);
+    const resource = getResource(cfg.type);
 
     console.log('Fetching topics...');
     return new SimpleRyverAPIRequest(org, auth)
@@ -23,5 +34,6 @@ export function processAction(msg, cfg) {
             }));
             
             return messages.newMessageWithBody({ topics });
-        });
+        })
+        .catch(err => { throw err; });
 }

@@ -1,0 +1,10 @@
+{
+    "type": "object",
+    "properties": {
+        "topicId": {
+            "type": "number",
+            "required": false,
+            "title": "Topic ID"
+        }
+    }
+}

@@ -6,12 +6,13 @@ export function createAuth(cfg: any): string {
     return cfg.user ? `Basic ${btoa(`${cfg.user}:${cfg.pass}`)}` : `Bearer ${cfg.token}`;
 }
 
-export function getType(type: string): string {
-    if (type === "Teams") {
-        return "workrooms";
+export function getResource(type: string): string {
+    const resource = type && type.toLowerCase();
+    if (resource === 'teams') {
+        return 'workrooms';
     }
 
-    return type && type.toLowerCase() || '';
+    return resource || '';
 }
 
 export function getPostType(type: string) {
@@ -47,7 +48,7 @@ export function getEntityTypeModel(cfg, cb) {
 export function getEntityModel(cfg, cb) {
     const org = cfg.org;
     const auth = createAuth(cfg);
-    const resource = getType(cfg.type);
+    const resource = getResource(cfg.type);
 
     new SimpleRyverAPIRequest(org, auth)
         .get(resource)
@@ -73,10 +74,44 @@ export function getEntityModel(cfg, cb) {
         .catch(cb);
 }
 
+export function getUserModel(cfg, cb) {
+    const org = cfg.org;
+    const auth = createAuth(cfg);
+    const resource = getResource(cfg.type);
+
+    new SimpleRyverAPIRequest(org, auth)
+        .get(`${resource}(${cfg.entityId})/members`, { '$expand': 'member', '$select': 'member' })
+        .then(res => {
+            const byId = res.reduce((byId, chat) => (
+                byId[chat.member.id] = chat.member.displayName,
+                byId
+            ), {});
+            cb(null, byId);
+        })
+        .catch(cb);
+}
+
+export function getTopicModel(cfg, cb) {
+    const org = cfg.org;
+    const auth = createAuth(cfg);
+    const resource = getResource(cfg.type);
+
+    new SimpleRyverAPIRequest(org, auth)
+        .get(`${resource}(${cfg.entityId})/Post.Stream(archived=false)`, { '$format': 'json' })
+        .then(res => {
+            const byId = res.reduce((byId, topic) => (
+                byId[topic.id] = topic.subject,
+                byId
+            ), {});
+            cb(null, byId);
+        })
+        .catch(cb);
+}
+
 export function getCategoryModel(cfg, cb) {
     const org = cfg.org;
     const auth = createAuth(cfg);
-    const resource = getType(cfg.type);
+    const resource = getResource(cfg.type);
 
     new SimpleRyverAPIRequest(org, auth)
         .get(`${resource}(${cfg.entityId})/board`, { '$select': 'id' })
@@ -92,6 +127,22 @@ export function getCategoryModel(cfg, cb) {
             cb(null, byId);
         })
         .catch(cb);
+}
+
+export function getTaskModel(cfg, cb) {
+    const org = cfg.org;
+    const auth = createAuth(cfg);
+
+    new SimpleRyverAPIRequest(org, auth)
+    .get(`taskCategories(${cfg.fromCategoryId})/tasks`)
+    .then(res => {
+        const byId = res.reduce((byId, task) => (
+            byId[task.id] = task.subject,
+            byId
+        ), {});
+        cb(null, byId);
+    })
+    .catch(cb);
 }
 
 export function getMetaModel(cfg, cb){

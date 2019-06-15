@@ -1,0 +1,20 @@
+{
+  "type": "object",
+  "properties": {
+    "title": {
+        "type": "string",
+        "required": false,
+        "title": "From Name (Optional)"
+    },
+    "avatar": {
+        "type": "string",
+        "required": false,
+        "title": "From Avatar (Optional)"
+    },
+    "body": {
+        "type": "string",
+        "required": true,
+        "title": "Message Body"
+    }
+  }
+}

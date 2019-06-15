@@ -1,0 +1,15 @@
+{
+    "type": "object",
+    "properties": {
+        "taskId": {
+            "type": "number",
+            "required": false,
+            "title": "Task ID"
+        },
+        "toCategoryId": {
+            "type": "number",
+            "required": false,
+            "title": "toCategoryId"
+        }
+    }
+}

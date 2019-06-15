@@ -1,0 +1,20 @@
+{
+    "type": "object",
+    "properties": {
+        "type": {
+            "type": "string",
+            "required": false,
+            "title": "Pick a type: Forums, Teams, or Users"
+        },
+        "id": {
+            "type": "number",
+            "required": false,
+            "title": "Forum, Team, or User Id"
+        },
+        "skip": {
+            "type": "integer",
+            "required": false,
+            "title": "Number of chat messages to skip (for paging)"
+        }
+    }
+}

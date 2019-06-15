@@ -1,0 +1,10 @@
+{
+    "type": "object",
+    "properties": {
+        "entityId": {
+            "type": "number",
+            "required": false,
+            "title": "Team or Forum ID"
+        }
+    }
+}

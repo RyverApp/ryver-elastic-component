@@ -1,0 +1,15 @@
+{
+    "type": "object",
+    "properties": {
+        "subject": {
+            "type": "string",
+            "required": true,
+            "title": "Topic subject"
+        },
+        "body": {
+            "type": "string",
+            "required": false,
+            "title": "Topic description"
+        }
+    }
+}

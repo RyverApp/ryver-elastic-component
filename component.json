@@ -30,313 +30,413 @@
       }
     }
   },
-  "triggers": {
-    "getTeamsOrForums": {
-      "main": "./lib/triggers/getTeamsOrForums.js",
-      "type": "polling",
-      "title": "Get Teams or Forums",
-      "fields": {
-        "entityType": {
-          "label": "Type",
-          "required": true,
-          "viewClass": "SelectView",
-          "model": {
-            "forums": "Open Forums",
-            "workrooms": "Private Teams"
-          },
-          "prompt": "Select type"
-        }
-      },
-      "metadata": {
-        "out": "./lib/schemas/getTeamsOrForums.out.json"
-      }
-    },
-    "getChatHistory": {
-      "main": "./lib/triggers/getChatHistory.js",
-      "type": "polling",
-      "title": "Get Chat History",
-      "fields" : {
-        "type" : {
-          "viewClass": "SelectView",
-          "label": "List from forum or team?",
-          "required": false,
-          "model" : "getTeamOrForumModel",
-          "prompt" :"Please select an option"
-        },
-        "entityId" : {
-          "viewClass": "SelectView",
-          "label": "Choose location:",
-          "required": false,
-          "model" : "getEntityModel",
-          "prompt" :"Please select a location"
-        },
-        "dynamicMetadata":true
-      },
-      "metadata": {
-        "out": "./lib/schemas/getChatHistory.out.json"
-      }
-    }
-  },
   "actions": {
     "sendMessage": {
       "main": "./lib/actions/sendMessage.js",
       "title": "Send message to Ryver chat",
-      "fields" : {
-        "type" : {
+      "fields": {
+        "type": {
           "viewClass": "SelectView",
           "label": "Send to forum, team or user?",
           "required": true,
-          "model" : "getEntityTypeModel",
-          "prompt" :"Please select an option"
+          "model": "getEntityTypeModel",
+          "prompt": "Please select an option"
         },
-        "entityId" : {
+        "entityId": {
           "viewClass": "SelectView",
           "label": "Choose location:",
           "required": true,
-          "model" : "getEntityModel",
-          "prompt" :"Please select a location"
+          "model": "getEntityModel",
+          "prompt": "Please select a location"
         },
         "dynamicMetadata":true
       },
       "metadata": {
-        "in":"./lib/schemas/messageData.in.json",
-        "out": "./lib/schemas/messageData.out.json"
+        "in": "./lib/schemas/sendMessage.in.json",
+        "out": "./lib/schemas/sendMessage.out.json"
       }
     },
     "createTopic": {
       "main": "./lib/actions/createTopic.js",
       "title": "Create Topic",
-      "fields" : {
-        "type" : {
+      "fields": {
+        "type": {
           "viewClass": "SelectView",
           "label": "Send to forum or team?",
           "required": true,
-          "model" : "getTeamOrForumModel",
-          "prompt" :"Please select an option"
+          "model": "getTeamOrForumModel",
+          "prompt": "Please select an option"
         },
         "entityId" : {
           "viewClass": "SelectView",
           "label": "Choose location:",
           "required": true,
-          "model" : "getEntityModel",
-          "prompt" :"Please select a location"
+          "model": "getEntityModel",
+          "prompt": "Please select a location"
         },
         "dynamicMetadata":true
       },
       "metadata": {
-        "in":"./lib/schemas/topicData.in.json",
-        "out": "./lib/schemas/topicData.out.json"
+        "in": "./lib/schemas/createTopic.in.json",
+        "out": "./lib/schemas/createTopic.out.json"
+      }
+    },
+    "createTopicComment": {
+      "main": "./lib/actions/createTopicComment.js",
+      "title": "Create a comment on a topic",
+      "fields": {
+        "type": {
+          "viewClass": "SelectView",
+          "label": "Is the topic in a forum or team?",
+          "required": true,
+          "model": "getTeamOrForumModel",
+          "prompt": "Please select an option"
+        },
+        "entityId": {
+          "viewClass": "SelectView",
+          "label": "Choose location:",
+          "required": true,
+          "model": "getEntityModel",
+          "prompt": "Please select a location"
+        },
+        "topicId": {
+          "viewClass": "SelectView",
+          "label": "Select a topic",
+          "required": true,
+          "model": "getTopicModel",
+          "prompt": "Please select a topic"
+        },
+        "dynamicMetadata": true
+      },
+      "metadata": {
+        "in": "./lib/schemas/createTopicComment.in.json",
+        "out": "./lib/schemas/createTopicComment.out.json"
       }
     },
     "createTask": {
       "main": "./lib/actions/createTask.js",
       "title": "Create Task",
-      "fields" : {
-        "type" : {
+      "fields": {
+        "type": {
           "viewClass": "SelectView",
           "label": "Send to forum or team?",
           "required": true,
-          "model" : "getTeamOrForumModel",
-          "prompt" :"Please select an option"
+          "model": "getTeamOrForumModel",
+          "prompt": "Please select an option"
         },
-        "entityId" : {
+        "entityId": {
           "viewClass": "SelectView",
           "label": "Choose location:",
           "required": true,
-          "model" : "getEntityModel",
-          "prompt" :"Please select a location"
+          "model": "getEntityModel",
+          "prompt": "Please select a location"
         },
-        "cat" : {
+        "category": {
           "viewClass": "SelectView",
           "label": "Select category",
           "required": false,
-          "model" : "getCategoryModel",
-          "prompt" :"Please select a category"
+          "model": "getCategoryModel",
+          "prompt": "Please select a category"
         },
-        "assign" : {
+        "assignees": {
           "viewClass": "SelectView",
           "label": "Assign to user (optional)",
           "required": false,
-          "model" : "getUserModel",
-          "prompt" :"Please select an option"
+          "model": "getUserModel",
+          "prompt": "Please select an option"
         },
         "completed": {
           "label": "Mark task as complete",
           "viewClass": "CheckBoxView"
        },
-        "dynamicMetadata":true
+        "dynamicMetadata": true
       },
       "metadata": {
-        "in":"./lib/schemas/taskData.in.json",
-        "out": "./lib/schemas/taskData.out.json"
+        "in": "./lib/schemas/createTask.in.json",
+        "out": "./lib/schemas/createTask.out.json"
+      }
+    },
+    "createTaskComment": {
+      "main": "./lib/actions/createTaskComment.js",
+      "title": "Create a comment on a task",
+      "fields": {
+        "type": {
+          "viewClass": "SelectView",
+          "label": "Is the task in a forum or team?",
+          "required": true,
+          "model": "getTeamOrForumModel",
+          "prompt": "Please select an option"
+        },
+        "entityId": {
+          "viewClass": "SelectView",
+          "label": "Choose location:",
+          "required": true,
+          "model": "getEntityModel",
+          "prompt": "Please select a location"
+        },
+        "category": {
+          "viewClass": "SelectView",
+          "label": "Select category",
+          "required": true,
+          "model": "getCategoryModel",
+          "prompt": "Please select a category"
+        },
+        "taskId": {
+          "viewClass": "SelectView",
+          "label": "Select a task",
+          "required": true,
+          "model": "getTaskModel",
+          "prompt": "Please select a task"
+        },
+        "dynamicMetadata": true
+      },
+      "metadata": {
+        "in": "./lib/schemas/createTaskComment.in.json",
+        "out": "./lib/schemas/createTaskComment.out.json"
+      }
+    },
+    "createTeam": {
+      "main": "./lib/actions/createTeam.js",
+      "title": "Create Team",
+      "fields": {
+        "chatTab": {
+          "label": "Chat",
+          "viewClass": "CheckBoxView"
+        },
+        "sharePosts": {
+          "label": "Announce new topics in chat",
+          "viewClass": "CheckBoxView"
+        },
+        "shareTasks": {
+          "label": "Announce new tasks in chat",
+          "viewClass": "CheckBoxView"
+        },
+        "topicTab": {
+          "label": "Topics",
+          "viewClass": "CheckBoxView"
+        },
+        "taskTab": {
+          "label": "Tasks",
+          "viewClass": "CheckBoxView"
+        },
+        "dynamicMetadata": true
+      },
+      "metadata": {
+        "in": "./lib/schemas/createTeam.in.json",
+        "out": "./lib/schemas/createTeam.out.json"
       }
     },
     "moveTask": {
       "main": "./lib/actions/moveTask.js",
       "title": "Move a task to new category",
-      "fields" : {
-        "type" : {
+      "fields": {
+        "type": {
           "viewClass": "SelectView",
           "label": "List from forum or team?",
-          "required": true,
-          "model" : "getTeamOrForumModel",
-          "prompt" :"Please select an option"
+          "required": false,
+          "model": "getTeamOrForumModel",
+          "prompt": "Please select an option"
         },
-        "entityId" : {
+        "entityId": {
           "viewClass": "SelectView",
           "label": "Choose location:",
-          "required": true,
-          "model" : "getEntityModel",
-          "prompt" :"Please select a location"
+          "required": false,
+          "model": "getEntityModel",
+          "prompt": "Please select a location"
         },
-        "fromCategoryId" : {
+        "fromCategoryId": {
           "viewClass": "SelectView",
           "label": "Select source category",
-          "required": true,
-          "model" : "getCategoryModel",
-          "prompt" :"Please select a source category"
+          "required": false,
+          "model": "getCategoryModel",
+          "prompt": "Please select a source category"
         },
         "taskId": {
           "viewClass": "SelectView",
           "label": "Select task to move",
-          "required": true,
-          "model" : "getTaskModel",
-          "prompt" :"Please select a task to move"
+          "required": false,
+          "model": "getTaskModel",
+          "prompt": "Please select a task to move"
         },
-        "toCategoryId" : {
+        "toCategoryId": {
           "viewClass": "SelectView",
           "label": "Select destination category",
-          "required": true,
-          "model" : "getCategoryModel",
-          "prompt" :"Please select a destination category"
+          "required": false,
+          "model": "getCategoryModel",
+          "prompt": "Please select a destination category"
         },
         "toPosition": {
           "viewClass": "TextFieldView",
           "label": "Enter the task's position (optional)",
           "required": false,
-          "prompt" :"Please enter the task's position in its new category"
+          "prompt": "Please enter the task's position in its new category"
         },
-        "dynamicMetadata":true
+        "dynamicMetadata": true
+      },
+      "metadata": {
+        "in": "./lib/schemas/moveTask.in.json",
+        "out": "./lib/schemas/moveTask.out.json"
       }
     },
     "getTopics": {
       "main": "./lib/actions/getTopics.js",
       "title": "List topics",
-      "fields" : {
-        "type" : {
+      "fields": {
+        "type": {
           "viewClass": "SelectView",
           "label": "List from forum or team?",
           "required": false,
-          "model" : "getTeamOrForumModel",
-          "prompt" :"Please select an option"
+          "model": "getTeamOrForumModel",
+          "prompt": "Please select an option"
         },
-        "entityId" : {
+        "entityId": {
           "viewClass": "SelectView",
           "label": "Choose location:",
           "required": false,
-          "model" : "getEntityModel",
-          "prompt" :"Please select a location"
+          "model": "getEntityModel",
+          "prompt": "Please select a location"
         },
-        "dynamicMetadata":true
+        "dynamicMetadata": true
+      },
+      "metadata": {
+        "in": "./lib/schemas/getTopics.in.json",
+        "out": "./lib/schemas/getTopics.out.json"
       }
     },
     "getTopicComments": {
       "main": "./lib/actions/getTopicComments.js",
       "title": "List messages from topics",
-      "fields" : {
-        "type" : {
+      "fields": {
+        "type": {
           "viewClass": "SelectView",
           "label": "Send to forum or team?",
           "required": false,
-          "model" : "getTeamOrForumModel",
-          "prompt" :"Please select an option"
+          "model": "getTeamOrForumModel",
+          "prompt": "Please select an option"
         },
-        "entityId" : {
+        "entityId": {
           "viewClass": "SelectView",
           "label": "Choose location:",
           "required": false,
-          "model" : "getEntityModel",
-          "prompt" :"Please select a location"
+          "model": "getEntityModel",
+          "prompt": "Please select a location"
         },
-        "topic" : {
+        "topic": {
           "viewClass": "SelectView",
           "label": "Select category",
           "required": false,
-          "model" : "getTopicModel",
-          "prompt" :"Please select a category"
+          "model": "getTopicModel",
+          "prompt": "Please select a category"
         },
-        "dynamicMetadata":true
+        "dynamicMetadata": true
+      },
+      "metadata": {
+        "in": "./lib/schemas/getTopicComments.in.json",
+        "out": "./lib/schemas/getTopicComments.out.json"
       }
     },
     "getTasksFromCategory": {
       "main": "./lib/actions/getTasksFromCategory.js",
       "title": "List tasks from category",
-      "fields" : {
-        "type" : {
+      "fields": {
+        "type": {
           "viewClass": "SelectView",
           "label": "List from forum or team?",
           "required": false,
-          "model" : "getTeamOrForumModel",
-          "prompt" :"Please select an option"
+          "model": "getTeamOrForumModel",
+          "prompt": "Please select an option"
         },
-        "entityId" : {
+        "entityId": {
           "viewClass": "SelectView",
           "label": "Choose location:",
           "required": false,
-          "model" : "getEntityModel",
-          "prompt" :"Please select a location"
+          "model": "getEntityModel",
+          "prompt": "Please select a location"
         },
-        "cat" : {
+        "category" : {
           "viewClass": "SelectView",
           "label": "Select category",
           "required": false,
-          "model" : "getCategoryModel",
-          "prompt" :"Please select a category"
+          "model": "getCategoryModel",
+          "prompt": "Please select a category"
         },
-        "dynamicMetadata":true
+        "dynamicMetadata": true
+      },
+      "metadata": {
+        "in": "./lib/schemas/getTasksFromCategory.in.json",
+        "out": "./lib/schemas/getTasksFromCategory.out.json"
       }
     },
     "getMemberRoles": {
       "main": "./lib/actions/getMemberRoles.js",
       "title": "List members and roles",
-      "fields" : {
-        "type" : {
+      "fields": {
+        "type": {
           "viewClass": "SelectView",
           "label": "List from forum or team?",
           "required": false,
-          "model" : "getTeamOrForumModel",
-          "prompt" :"Please select an option"
+          "model": "getTeamOrForumModel",
+          "prompt":"Please select an option"
         },
         "entityId" : {
           "viewClass": "SelectView",
           "label": "Choose location:",
           "required": false,
-          "model" : "getEntityModel",
-          "prompt" :"Please select a location"
+          "model": "getEntityModel",
+          "prompt": "Please select a location"
         },
-        "dynamicMetadata":true
+        "dynamicMetadata": true
+      },
+      "metadata": {
+        "in": "./lib/schemas/getMemberRoles.in.json",
+        "out": "./lib/schemas/getMemberRoles.out.json"
       }
     },
-    "getChatHistoryAction": {
-      "main": "./lib/triggers/getChatHistory.js",
+    "getChatHistory": {
+      "main": "./lib/actions/getChatHistory.js",
       "title": "Get chat history",
-      "fields" : {
-        "type" : {
+      "fields": {
+        "type": {
           "viewClass": "SelectView",
           "label": "List from forum, team or user?",
           "required": false,
-          "model" : "getEntityTypeModel",
-          "prompt" :"Please select an option"
+          "model": "getEntityTypeModel",
+          "prompt":"Please select an option"
         },
-        "entityId" : {
+        "entityId": {
           "viewClass": "SelectView",
           "label": "Choose location:",
           "required": false,
-          "model" : "getEntityModel",
-          "prompt" :"Please select a location"
+          "model": "getEntityModel",
+          "prompt": "Please select a location"
         },
-        "dynamicMetadata":true
+        "dynamicMetadata": true
+      },
+      "metadata": {
+        "in": "./lib/schemas/getChatHistory.in.json",
+        "out": "./lib/schemas/getChatHistory.out.json"
       }
+    },
+    "getTeamsOrForums": {
+      "main": "./lib/actions/getTeamsOrForums.js",
+      "title": "Get a list of Teams or Forums",
+      "fields": {
+        "entityType": {
+          "label": "Choose type to list:",
+          "required": true,
+          "viewClass": "SelectView",
+          "model": {
+            "forums": "Forums",
+            "workrooms": "Teams"
+          },
+          "prompt": "Please select a type to list"
+        }
+      },
+      "metadata": {
+        "in": "./lib/schemas/getTeamsOrForums.in.json",
+        "out": "./lib/schemas/getTeamsOrForums.out.json"
+      },
+      "dynamicMetadata": true
     }
   }
 }

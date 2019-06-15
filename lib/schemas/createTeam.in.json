@@ -1,0 +1,25 @@
+{
+    "type": "object",
+    "properties": {
+        "name": {
+            "type": "string",
+            "required": true,
+            "title": "Name"
+        },
+        "nickname": {
+            "type": "string",
+            "required": false,
+            "title": "Nickname (Optional)"
+        },
+        "description": {
+            "type": "string",
+            "required": false,
+            "title": "Team Purpose (Optional)"
+        },
+        "about": {
+            "type": "string",
+            "required": false,
+            "title": "Description (Optional)"
+        }
+    }
+}

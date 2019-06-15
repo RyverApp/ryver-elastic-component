@@ -1,0 +1,32 @@
+{
+    "type": "object",
+    "properties": {
+        "results": {
+            "type":"array",
+            "required": true,
+            "title": "Topic Comments",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "required": true,
+                    "title": "ID"
+                },
+                "comment": {
+                    "type": "string",
+                    "required": false,
+                    "title": "Comment"
+                },
+                "createDate": {
+                    "type": "string",
+                    "required": false,
+                    "title": "Create Date"
+                },
+                "userCreatorId": {
+                    "type": "number",
+                    "required": false,
+                    "title": "Creator ID"
+                }
+            }
+        }
+    }
+}

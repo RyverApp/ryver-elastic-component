@@ -1,5 +1,5 @@
 import { SimpleRyverAPIRequest } from '../api';
-import { getTeamOrForumModel, getEntityModel, createAuth, getType, getPostType } from '../common';
+import { getTeamOrForumModel, getEntityModel, createAuth, getResource, getPostType } from '../common';
 const messages = require('elasticio-node').messages;
 
 exports.getTeamOrForumModel = getTeamOrForumModel;
@@ -12,13 +12,17 @@ export function processAction(msg, cfg) {
     const body = message.body;
     const subject = message.subject;
     const auth = createAuth(cfg);
-    const resource = getType(cfg.type);
+    const resource = getResource(cfg.type);
     const postType = getPostType(resource);
+
+    if (!subject) {
+        throw new Error('Subject is required');
+    }
 
     console.log('Creating a topic...');   
     const data = {
-        body: body,
-        subject: subject,
+        subject,
+        body,
         outAssociations: {
             results: [
                 {
@@ -34,8 +38,9 @@ export function processAction(msg, cfg) {
     return new SimpleRyverAPIRequest(org, auth)
         .post(`posts`, {}, data)
         .then(res => (messages.newMessageWithBody({
+            id: res.id,
             subject,
-            message: body,
-            postId: res.id
-        })));
+            message: body
+        })))
+        .catch(err => { throw err; });
 }

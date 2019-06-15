@@ -1,14 +1,19 @@
 {
     "type": "object",
     "properties": {
+        "id": {
+            "type": "number",
+            "required": false,
+            "title": "Topic ID"
+        },
         "subject": {
             "type": "string",
-            "required": true,
+            "required": false,
             "title": "Topic title"
         },
         "body": {
             "type": "string",
-            "required": true,
+            "required": false,
             "title": "Topic description"
         }
     }

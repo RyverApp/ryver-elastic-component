@@ -10,10 +10,16 @@ exports.process = processAction;
 export function processAction(msg, cfg) {
     const org = cfg.org;
     const auth = createAuth(cfg);
+    const message = msg.body;
+    const categoryId = message.categoryId || cfg.category;
+
+    if (!categoryId) {
+        throw new Error('Category is required');
+    }
 
     console.log('Fetching tasks...');
     return new SimpleRyverAPIRequest(org, auth)
-        .get(`taskCategories(${cfg.cat})/tasks`)
+        .get(`taskCategories(${cfg.category})/tasks`)
         .then(res => {
             const tasks = res.map(task => ({
                 id: task.id,
@@ -22,5 +28,6 @@ export function processAction(msg, cfg) {
             }));
 
             return messages.newMessageWithBody({ tasks });
-        });
+        })
+        .catch(err => { throw err; });
 }

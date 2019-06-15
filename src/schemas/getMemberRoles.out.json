@@ -1,0 +1,27 @@
+{
+    "type": "object",
+    "properties": {
+        "results": {
+            "type":"array",
+            "required": true,
+            "title": "Members",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "required": true,
+                    "title": "User ID"
+                },
+                "displayName": {
+                    "type": "string",
+                    "required": false,
+                    "title": "Display Name"
+                },
+                "role": {
+                    "type": "string",
+                    "required": true,
+                    "title": "Role"
+                }
+            }
+        }
+    }
+}
