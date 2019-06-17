@@ -27,7 +27,7 @@ export function processAction(msg, cfg) {
 
     console.log('Moving task...');
     return new SimpleRyverAPIRequest(org, auth)
-        .post(`tasks(${taskId})/Task.Move(position=${toPosition}, category=${toCategoryId})`, { '$expand': 'createUser,modifyUser,assignees', '$select': 'id,__descriptor,__subscribed,modifyDate,createDate,dueDate,completeDate,createSource,archived,short,subject,body,quote,position,commentsCount,attachmentsCount,latestComments,tags,createUser%2Fid,createUser%2F__descriptor,modifyUser%2Fid,modifyUser%2F__descriptor,assignees%2Fid,assignees%2F__descriptor,embeds,extras' }, {})
+        .post(`tasks(${taskId})/Task.Move(position=${toPosition}, category=${toCategoryId})`, { '$expand': 'createUser,modifyUser,assignees', '$select': 'id,__descriptor,__subscribed,modifyDate,createDate,dueDate,completeDate,createSource,archived,short,subject,body,quote,position,commentsCount,attachmentsCount,latestComments,tags,createUser/id,createUser/__descriptor,modifyUser/id,modifyUser/__descriptor,assignees/id,assignees/__descriptor,embeds,extras' }, {})
         .then(res => messages.newMessageWithBody({
             ...res,
             categoryId: toCategoryId

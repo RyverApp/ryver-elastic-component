@@ -124,7 +124,6 @@ export function getCategoryModel(cfg, cb) {
                 byId[category.id] = category.name,
                 byId
             ), {});
-            console.log('byId=', byId);
             cb(null, byId);
         })
         .catch(cb);
