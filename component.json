@@ -1,6 +1,6 @@
 {
   "title": "Ryver",
-  "description": "Component to create Ryver tasks",
+  "description": "Ryver component for elastic.io environment",
   "docsUrl": "https://github.com/RyverApp/ryver-elastic-component",
   "credentials": {
     "fields": {
