@@ -16,8 +16,8 @@
     "noImplicitReturns": true,
     "noImplicitThis": false,
     "experimentalDecorators": true,
-    "allowSyntheticDefaultImports": true,
-    "forceConsistentCasingInFileNames": true
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
   },
     "include": [
         "src/**/*.ts",
