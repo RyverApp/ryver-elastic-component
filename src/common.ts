@@ -74,7 +74,7 @@ export function getEntityModel(cfg, cb) {
         .catch(cb);
 }
 
-export function getUserModel(cfg, cb) {
+export function getMemberModel(cfg, cb) {
     const org = cfg.org;
     const auth = createAuth(cfg);
     const resource = getResource(cfg.type);
@@ -82,8 +82,8 @@ export function getUserModel(cfg, cb) {
     new SimpleRyverAPIRequest(org, auth)
         .get(`${resource}(${cfg.entityId})/members`, { '$expand': 'member', '$select': 'member' })
         .then(res => {
-            const byId = res.reduce((byId, chat) => (
-                byId[chat.member.id] = chat.member.displayName,
+            const byId = res.reduce((byId, entity) => (
+                byId[entity.member.id] = entity.member.displayName,
                 byId
             ), {});
             cb(null, byId);
@@ -117,13 +117,14 @@ export function getCategoryModel(cfg, cb) {
         .get(`${resource}(${cfg.entityId})/board`, { '$select': 'id' })
         .then(res => (
             new SimpleRyverAPIRequest(org, auth)
-                .get(`taskBoards(${parseInt(res.id)})/categories`, { '$select': 'id,name' })
+                .get(`taskBoards(${res.id})/categories`, { '$select': 'id,name' })
         ))
         .then(res => {
             const byId = res.reduce((byId, category) => (
                 byId[category.id] = category.name,
                 byId
             ), {});
+            console.log('byId=', byId);
             cb(null, byId);
         })
         .catch(cb);

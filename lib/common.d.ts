@@ -4,7 +4,7 @@ export declare function getPostType(type: string): string;
 export declare function getTeamOrForumModel(cfg: any, cb: any): void;
 export declare function getEntityTypeModel(cfg: any, cb: any): void;
 export declare function getEntityModel(cfg: any, cb: any): void;
-export declare function getUserModel(cfg: any, cb: any): void;
+export declare function getMemberModel(cfg: any, cb: any): void;
 export declare function getTopicModel(cfg: any, cb: any): void;
 export declare function getCategoryModel(cfg: any, cb: any): void;
 export declare function getTaskModel(cfg: any, cb: any): void;

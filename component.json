@@ -142,7 +142,7 @@
           "viewClass": "SelectView",
           "label": "Assign to user (optional)",
           "required": false,
-          "model": "getUserModel",
+          "model": "getMemberModel",
           "prompt": "Please select an option"
         },
         "completed": {

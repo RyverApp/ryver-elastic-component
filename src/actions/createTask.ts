@@ -1,11 +1,11 @@
 import { SimpleRyverAPIRequest } from '../api';
-import { getTeamOrForumModel, getEntityModel, getCategoryModel, getUserModel, createAuth, getResource } from '../common';
+import { getTeamOrForumModel, getEntityModel, getCategoryModel, getMemberModel, createAuth, getResource } from '../common';
 const messages = require('elasticio-node').messages;
 
 exports.getTeamOrForumModel = getTeamOrForumModel;
 exports.getEntityModel = getEntityModel;
 exports.getCategoryModel = getCategoryModel;
-exports.getUserModel = getUserModel;
+exports.getMemberModel = getMemberModel;
 exports.process = processAction;
 
 export function processAction(msg, cfg) {
