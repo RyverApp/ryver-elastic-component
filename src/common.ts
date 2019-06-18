@@ -50,6 +50,12 @@ export function getEntityModel(cfg, cb) {
     const auth = createAuth(cfg);
     const resource = getResource(cfg.type);
 
+    if (!cfg.type) {
+        console.log('Type is missing');
+        cb(null, {});
+        return;
+    }
+
     new SimpleRyverAPIRequest(org, auth)
         .get(resource)
         .then(res => {
@@ -79,6 +85,18 @@ export function getMemberModel(cfg, cb) {
     const auth = createAuth(cfg);
     const resource = getResource(cfg.type);
 
+    if (!cfg.type) {
+        console.log('Type is missing');
+        cb(null, {});
+        return;
+    }
+
+    if (!cfg.entityId) {
+        console.log('Location is missing');
+        cb(null, {});
+        return;
+    }
+
     new SimpleRyverAPIRequest(org, auth)
         .get(`${resource}(${cfg.entityId})/members`, { '$expand': 'member', '$select': 'member' })
         .then(res => {
@@ -96,6 +114,18 @@ export function getTopicModel(cfg, cb) {
     const auth = createAuth(cfg);
     const resource = getResource(cfg.type);
 
+    if (!cfg.type) {
+        console.log('Type is missing');
+        cb(null, {});
+        return;
+    }
+
+    if (!cfg.entityId) {
+        console.log('Location is missing');
+        cb(null, {});
+        return;
+    }
+
     new SimpleRyverAPIRequest(org, auth)
         .get(`${resource}(${cfg.entityId})/Post.Stream(archived=false)`, { '$format': 'json' })
         .then(res => {
@@ -112,6 +142,18 @@ export function getCategoryModel(cfg, cb) {
     const org = cfg.org;
     const auth = createAuth(cfg);
     const resource = getResource(cfg.type);
+
+    if (!cfg.type) {
+        console.log('Type is missing');
+        cb(null, {});
+        return;
+    }
+    
+    if (!cfg.entityId) {
+        console.log('Location is missing');
+        cb(null, {});
+        return;
+    }
 
     new SimpleRyverAPIRequest(org, auth)
         .get(`${resource}(${cfg.entityId})/board`, { '$select': 'id' })
@@ -132,6 +174,12 @@ export function getCategoryModel(cfg, cb) {
 export function getTaskModel(cfg, cb) {
     const org = cfg.org;
     const auth = createAuth(cfg);
+
+    if (!cfg.category) {
+        console.log('Category is missing');
+        cb(null, {});
+        return;
+    }
 
     new SimpleRyverAPIRequest(org, auth)
     .get(`taskCategories(${cfg.category})/tasks`)

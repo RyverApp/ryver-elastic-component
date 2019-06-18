@@ -5,7 +5,7 @@
   "credentials": {
     "fields": {
       "org": {
-        "label": "Organization name",
+        "label": "Organization Name",
         "required": true,
         "viewClass": "TextFieldView",
         "note": "Enter here your Ryver organization name."
@@ -37,7 +37,7 @@
       "fields": {
         "type": {
           "viewClass": "SelectView",
-          "label": "Send to forum, team or user?",
+          "label": "Send to a forum, team or user?",
           "required": true,
           "model": "getEntityTypeModel",
           "prompt": "Please select an option"
@@ -62,7 +62,7 @@
       "fields": {
         "type": {
           "viewClass": "SelectView",
-          "label": "Send to forum or team?",
+          "label": "Create in a forum or team?",
           "required": true,
           "model": "getTeamOrForumModel",
           "prompt": "Please select an option"
@@ -119,7 +119,7 @@
       "fields": {
         "type": {
           "viewClass": "SelectView",
-          "label": "Send to forum or team?",
+          "label": "Create in a forum or team?",
           "required": true,
           "model": "getTeamOrForumModel",
           "prompt": "Please select an option"
@@ -183,7 +183,7 @@
         },
         "taskId": {
           "viewClass": "SelectView",
-          "label": "Select a task",
+          "label": "Select task",
           "required": true,
           "model": "getTaskModel",
           "prompt": "Please select a task"
@@ -228,11 +228,11 @@
     },
     "moveTask": {
       "main": "./lib/actions/moveTask.js",
-      "title": "Move a task to new category",
+      "title": "Move a task to a new category",
       "fields": {
         "type": {
           "viewClass": "SelectView",
-          "label": "List from forum or team?",
+          "label": "List from forums or teams?",
           "required": false,
           "model": "getTeamOrForumModel",
           "prompt": "Please select an option"
@@ -305,11 +305,11 @@
     },
     "getTopicComments": {
       "main": "./lib/actions/getTopicComments.js",
-      "title": "List messages from topics",
+      "title": "List topic comments",
       "fields": {
         "type": {
           "viewClass": "SelectView",
-          "label": "Send to forum or team?",
+          "label": "List from a forum or team?",
           "required": false,
           "model": "getTeamOrForumModel",
           "prompt": "Please select an option"
@@ -337,11 +337,11 @@
     },
     "getTasksFromCategory": {
       "main": "./lib/actions/getTasksFromCategory.js",
-      "title": "List tasks from category",
+      "title": "List tasks from a category",
       "fields": {
         "type": {
           "viewClass": "SelectView",
-          "label": "List from forum or team?",
+          "label": "List from a forum or team?",
           "required": false,
           "model": "getTeamOrForumModel",
           "prompt": "Please select an option"
@@ -373,7 +373,7 @@
       "fields": {
         "type": {
           "viewClass": "SelectView",
-          "label": "List from forum or team?",
+          "label": "List from a forum or team?",
           "required": false,
           "model": "getTeamOrForumModel",
           "prompt":"Please select an option"
@@ -394,11 +394,11 @@
     },
     "getChatHistory": {
       "main": "./lib/actions/getChatHistory.js",
-      "title": "Get chat history",
+      "title": "List chat history",
       "fields": {
         "type": {
           "viewClass": "SelectView",
-          "label": "List from forum, team or user?",
+          "label": "List from a forum, team or user?",
           "required": false,
           "model": "getEntityTypeModel",
           "prompt":"Please select an option"
@@ -419,7 +419,7 @@
     },
     "getTeamsOrForums": {
       "main": "./lib/actions/getTeamsOrForums.js",
-      "title": "Get a list of Teams or Forums",
+      "title": "List teams or forums",
       "fields": {
         "entityType": {
           "label": "Choose type to list:",

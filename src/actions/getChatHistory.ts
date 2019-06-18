@@ -5,9 +5,9 @@ const messages = require('elasticio-node').messages;
 exports.getTeamOrForumModel = getTeamOrForumModel;
 exports.getEntityTypeModel = getEntityTypeModel;
 exports.getEntityModel = getEntityModel;
-exports.process = processTrigger;
+exports.process = processAction;
 
-export function processTrigger(msg, cfg) {
+export function processAction(msg, cfg) {
     const message = msg.body;
     const type = message.type || cfg.type;
     const entityId = message.id || cfg.entityId;
