@@ -25,14 +25,18 @@ export function processAction(msg, cfg) {
     const resource = getResource(cfg.type);
 
     console.log('Creating a task...');
-    new SimpleRyverAPIRequest(org, auth)
+    return new SimpleRyverAPIRequest(org, auth)
         .get(`${resource}(${cfg.entityId})/board`, { '$select': 'id' })
         .then(res => {
             const data: { [key: string]: any } = {
                 subject: message.subject,
                 body: message.body,
-                assignees: assigneeIds.map(id => ({ id: parseInt(id.trim(), 10) })),
-                subTasks: message.checklist ? message.checklist.split(",").map(subject => ({ subject: subject.trim() })) : [],
+                assignees: {
+                    results: assigneeIds.map(id => ({ id: parseInt(id.trim(), 10) }))
+                },
+                subTasks: {
+                    results: message.checklist ? message.checklist.split(",").map(subject => ({ subject: subject.trim() })) : []
+                },
                 tags: message.tags ? message.tags.split(",").map(tag => tag.trim()) : [],
                 board: {
                     id: res.id
@@ -48,11 +52,8 @@ export function processAction(msg, cfg) {
             }
 
             return new SimpleRyverAPIRequest(org, auth)
-                .post(`tasks`, { '$select': 'id,__descriptor,modifyDate,createDate,dueDate,completeDate,createSource,archived,short,subject,body,quote,position,commentsCount,attachmentsCount,tags,board/id,board/__descriptor,category/id,category/__descriptor,category/categoryType,parent/id,createUser/id,createUser/__descriptor,modifyUser/id,modifyUser/__descriptor,assignees/id,assignees/__descriptor,attachments/id,attachments/type,attachments/url,attachments/createDate,attachments/fileSize,attachments/fileName,attachments/showPreview,attachments/embeds,attachments/recordType,subTasks/id,subTasks/subject,subTasks/completeDate,subTasks/position,embeds,extras,__reactions,__subscribed', '$expand': 'board,category,parent,createUser,modifyUser,assignees,attachments,subTasks' }, data);
+                .post(`tasks`, { '$expand': 'board,category,createUser,modifyUser,assignees,attachments,subTasks', '$select': 'id,__descriptor,modifyDate,createDate,dueDate,completeDate,createSource,archived,short,subject,body,quote,position,commentsCount,attachmentsCount,tags,board/id,board/__descriptor,category/id,category/__descriptor,category/categoryType,createUser/id,createUser/__descriptor,modifyUser/id,modifyUser/__descriptor,assignees/id,assignees/__descriptor,attachments/id,attachments/type,attachments/url,attachments/createDate,attachments/fileSize,attachments/fileName,attachments/showPreview,attachments/embeds,attachments/recordType,subTasks/id,subTasks/subject,subTasks/completeDate,subTasks/position,embeds,extras,__reactions,__subscribed' }, data);
         })
         .then(res => messages.newMessageWithBody(res))
-        .catch(err => {
-            console.log('err message=', err.value, 'status=', err.status, err.statusText);
-            throw err;
-        });
+        .catch(err => { throw err; });
 }

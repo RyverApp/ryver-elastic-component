@@ -134,7 +134,7 @@ export function getTaskModel(cfg, cb) {
     const auth = createAuth(cfg);
 
     new SimpleRyverAPIRequest(org, auth)
-    .get(`taskCategories(${cfg.fromCategoryId})/tasks`)
+    .get(`taskCategories(${cfg.category})/tasks`)
     .then(res => {
         const byId = res.reduce((byId, task) => (
             byId[task.id] = task.subject,

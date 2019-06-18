@@ -36,13 +36,13 @@ export function processAction(msg, cfg) {
         shareTasks: cfg.chat && cfg.shareTasks || false
     };
 
-    const nickname = message.nickname && message.nickname.replace(/\s+/, '');
+    const nickname = message.nickname ? message.nickname.trim() : '';
     const auth = createAuth(cfg);
 
     if (nickname) {
-        if (nickname < 2) {
+        if (nickname.length < 2) {
             throw new Error('Nickname must be at least 2 characters');
-        } else if (nickname > 24) {
+        } else if (nickname.length > 24) {
             throw new Error('Nickname must be under 25 characters');
         } else {
             data.nickname = nickname;
@@ -59,7 +59,7 @@ export function processAction(msg, cfg) {
                 }
 
                 return new SimpleRyverAPIRequest(org, auth)
-                    .post(`workrooms/Workroom.Create()`, {}, data);
+                    .post(`workrooms`, {}, data);
             })
             .then(res => messages.newMessageWithBody({
                 id: res.id,
@@ -70,7 +70,7 @@ export function processAction(msg, cfg) {
             .catch(err => { throw err; })
     ) : (
         new SimpleRyverAPIRequest(org, auth)
-        .post(`workrooms/Workroom.Create()`, {}, data)
+        .post(`workrooms`, {}, data)
         .then(res => messages.newMessageWithBody({
             id: res.id,
             name: res.name,

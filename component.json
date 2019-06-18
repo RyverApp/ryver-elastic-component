@@ -244,7 +244,7 @@
           "model": "getEntityModel",
           "prompt": "Please select a location"
         },
-        "fromCategoryId": {
+        "category": {
           "viewClass": "SelectView",
           "label": "Select source category",
           "required": false,

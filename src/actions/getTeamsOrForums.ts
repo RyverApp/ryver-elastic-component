@@ -2,9 +2,9 @@ import { SimpleRyverAPIRequest } from '../api';
 import { createAuth, getResource } from '../common';
 const messages = require('elastic-node').messages;
 
-exports.process = processTrigger;
+exports.process = processAction;
 
-function processTrigger(msg, cfg) {
+function processAction(msg, cfg) {
     const org = cfg.org;
     const entityType = msg.body.type || cfg.entityType;
     const auth = createAuth(cfg);
@@ -15,7 +15,7 @@ function processTrigger(msg, cfg) {
     
     console.log('Fetching teams or forums...');
     const resource = getResource(entityType);
-    new SimpleRyverAPIRequest(org, auth)
+    return new SimpleRyverAPIRequest(org, auth)
         .get(`${resource}`)
         .then(res => {
             return messages.newMessageWithBody({
