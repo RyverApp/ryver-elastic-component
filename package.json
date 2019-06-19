@@ -15,7 +15,7 @@
         "url": "git+https://github.com/RyverApp/ryver-elastic-component.git"
     },
     "author": "Ryver",
-    "license": "BSD-2-Clause",
+    "license": "MIT",
     "engines": {
         "node": ">=10.15.0"
     },
