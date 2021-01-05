@@ -20,7 +20,7 @@
         "node": ">=10.15.0"
     },
     "dependencies": {
-        "axios": "0.18.0",
+        "axios": "0.21.1",
         "btoa": "1.2.1",
         "debug": "4.1.1",
         "elasticio-node": "0.0.9",
